@@ -16,6 +16,19 @@ app.use(express.static(`${__dirname}/public`));
 
 io.on("connection", (socket) => {
   console.log("a user connected");
+
+  socket.on("client-nickname", (nickname) => {
+    socket.data.nickname = nickname;
+  });
+
+  socket.on("client-message", (msg) => {
+    console.log(msg);
+    io.emit("server-message", { id: socket.id, message: msg, nickname: socket.data.nickname });
+  });
+
+  socket.on("client-mousemove", (pos) => {
+    io.emit("server-mousemove", { pos, nickname: socket.data.nickname });
+  });
 });
 
 server.listen(process.env.PORT, () => {

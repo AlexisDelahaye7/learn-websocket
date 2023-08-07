@@ -1,0 +1,11 @@
+body {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+}
+
+.mouses-container > * {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
